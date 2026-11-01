@@ -1,0 +1,38 @@
+
+import SwiftUI
+
+struct ContentView: View {
+    @State private var showEffects = true
+    @State private var showAnimation = true
+
+    var body: some View {
+        ZStack {
+            Color(red: 0.04, green: 0.05, blue: 0.10)
+                .ignoresSafeArea()
+
+            VStack(spacing: 22) {
+                Text("IOSVIET")
+                    .font(.system(size: 34, weight: .black))
+                    .foregroundColor(.cyan)
+
+                Text("INDEPENDENT CONTROL CENTER")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+
+                VStack(spacing: 18) {
+                    Toggle("Hiệu ứng giao diện", isOn: $showEffects)
+                    Toggle("Hoạt ảnh", isOn: $showAnimation)
+                }
+                .padding()
+                .background(Color.white.opacity(0.08))
+                .cornerRadius(16)
+
+                Text("IOSViet • Standalone Edition")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+            }
+            .padding(24)
+            .foregroundColor(.white)
+        }
+    }
+}
