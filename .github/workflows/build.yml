@@ -1,0 +1,42 @@
+
+name: Build IOSViet IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build app
+        run: |
+          xcodebuild \
+            -project IOSViet.xcodeproj \
+            -scheme IOSViet \
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath build/IOSViet.xcarchive \
+            CODE_SIGNING_ALLOWED=NO \
+            archive
+
+      - name: Package IPA
+        run: |
+          mkdir -p Payload
+          cp -R build/IOSViet.xcarchive/Products/Applications/IOSViet.app Payload/
+          zip -r IOSViet-unsigned.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: IOSViet-IPA
+          path: IOSViet-unsigned.ipa
