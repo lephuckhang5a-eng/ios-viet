@@ -1,0 +1,23 @@
+
+name: IOSViet
+
+options:
+  bundleIdPrefix: com.iosviet
+  deploymentTarget:
+    iOS: "16.0"
+
+targets:
+  IOSViet:
+    type: application
+    platform: iOS
+    sources:
+      - ContentView.swift
+      - IOSVietApp.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.iosviet.app
+        PRODUCT_NAME: IOSViet
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: IOSViet
